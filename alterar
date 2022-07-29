@@ -41,6 +41,7 @@ class Ui_MainWindow(object):
         self.pushButton_alterar.setGeometry(QtCore.QRect(400, 140, 75, 23))
         self.pushButton_alterar.setObjectName("pushButton_alterar")
         self.pushButton_alterar.clicked.connect(self.alterar)
+        self.pushButton_alterar.setEnabled(False)
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -76,13 +77,15 @@ class Ui_MainWindow(object):
         else :
             self.lineEdit_nome.setText(dados[1])
             self.lineEdit_telefone.setText(dados[2])
+            self.lineEdit_codigo.setEnabled(False)
+            self.pushButton_alterar.setEnabled(True)
 
     def alterar(self):
         codigo = self.lineEdit_codigo.text()
         nome = self.lineEdit_nome.text()
         telefone = self.lineEdit_telefone.text()
 
-        sql = "UPDATE cliente SET nome = %s, telefone = %s WHERE codigo = %s"
+        sql = "UPDATE cliente SET nome = %s, fone = %s WHERE codigo = %s"
 
         cursor.execute(sql, (nome, telefone, codigo))
         conexao.commit()
@@ -92,6 +95,10 @@ class Ui_MainWindow(object):
         aviso.setText("Alterado com sucesso.")
         aviso.exec_()
 
+        self.lineEdit_codigo.setEnabled(True)
+        self.lineEdit_nome.setText("")
+        self.lineEdit_telefone.setText("")
+        self.pushButton_alterar.setEnabled(False)
 
 
 if __name__ == "__main__":
