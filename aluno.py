@@ -159,7 +159,7 @@ class Ui_MainWindow(object):
         self.checkBox_manha.setChecked(False)
         self.checkBox_tarde.setChecked(False)
         self.checkBox_noite.setChecked(False)
-
+        sys.exit()
 
 
 if __name__ == "__main__":
